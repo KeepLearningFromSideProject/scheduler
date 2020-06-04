@@ -9,18 +9,24 @@
 	<textarea id="code" cols="30" rows="10"></textarea>
 	<button id="submit">submit</button>
 	<script>
+		function fixedEncodeURIComponent(str) {
+			return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
+				return '%' + c.charCodeAt(0).toString(16);
+			});
+		}
+
 		var el = document.getElementById('submit');
 		el.addEventListener('click', () => {
-			var code = encodeURI(document.getElementById('code').value);
-			code = code.replace(/#/g, '%23');
-			code = code.replace(/!/g, '%21');
-			code = code.replace(/\//g, '%2F');
-			var args = encodeURI('gg');
-			console.log(code);
-			console.log(args)
+			// Encode URL in JavaScript? https://stackoverflow.com/a/332897	
+			// * escape() will not encode: @*/+
+			// * encodeURI() will not encode: ~!@#$&*()=:/,;?+'
+			// * encodeURIComponent() will not encode: ~!*()'
+			var code = document.getElementById('code').value;
+			code = fixedEncodeURIComponent(code);
+			var args = fixedEncodeURIComponent('gg');
 
 			var request = new XMLHttpRequest();
-			request.open('GET', `/execute?code="${code}"&args="${args}"`, true);
+			request.open('GET', `/execute?code=${code}&args=${args}`, true);
 			request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 			
 			request.onload = function() {

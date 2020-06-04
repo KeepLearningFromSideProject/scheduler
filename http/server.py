@@ -13,7 +13,8 @@ app = Flask(__name__)
 def execute():
     code = request.args.get('code')
     args = request.args.get('args')
-
+    print(code)
+    print(args)
     PYTHON = 'python3'
     EXECUTE_SCRIPT = code
     EXECUTE_ARGS = args
@@ -26,25 +27,6 @@ def execute():
     print(out)
 
     return out
-
-
-@app.route("/execute-json")
-def executejson():
-    code = request.args.get('code')
-    args = request.args.get('args')
-
-    PYTHON = 'python3'
-    EXECUTE_SCRIPT = code
-    EXECUTE_ARGS = args
-    execute_command = [PYTHON, "-c", EXECUTE_SCRIPT, EXECUTE_ARGS]
-    p = Popen(execute_command, stdout=PIPE, stderr=PIPE)
-
-    # wait for the process to terminate
-    # or use p.wait() to wait
-    out, err = p.communicate()
-    print(out)
-
-    return jsonify(out)
 
 @app.route("/")
 def index():
