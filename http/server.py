@@ -13,12 +13,8 @@ app = Flask(__name__)
 def execute():
     code = request.args.get('code')
     args = request.args.get('args')
-    print(code)
-    print(args)
-    PYTHON = 'python3'
-    EXECUTE_SCRIPT = code
-    EXECUTE_ARGS = args
-    execute_command = [PYTHON, "-c", EXECUTE_SCRIPT, EXECUTE_ARGS]
+
+    execute_command = ["python3", "../worker/ezworker.py", code, args]
     p = Popen(execute_command, stdout=PIPE, stderr=PIPE)
 
     # wait for the process to terminate
