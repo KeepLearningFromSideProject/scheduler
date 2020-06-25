@@ -32,12 +32,6 @@ def solver(code, args):
             log.error("Connect Error" )
         return ""
 
-class ErrorHandler:
-    def __init__(self):
-        pass
-    def ordered_number(self):
-        pass
-
 def main():
     code = sys.argv[1]
     args = sys.argv[2]
