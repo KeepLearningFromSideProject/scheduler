@@ -5,7 +5,7 @@ class FormatChecker:
     def __init__(self):
         self.home_checker = re.compile(r'https://comicbus.com/html/\d+.html')
         self.episode_checker = re.compile(r'https://comicbus.live/online/a-\d+.html\?ch=\d+')
-        self.img_checker = re.compile(r'https://img4.8comic.com/\d+/\d+/\d+/(\d+)_\w+.jpg')
+        self.img_checker = re.compile(r'https://img\d+.8comic.com/\d+/\d+/\d+/(\d+)_\w+.jpg')
 
     def is_home_url(self, data):
         result = self.home_checker.match(data)
@@ -15,8 +15,8 @@ class FormatChecker:
             return False
 
     def is_episode_url(self, data):
-        for url in data:
-            result = self.episode_checker.match(url)
+        for episode in data:
+            result = self.episode_checker.match(data[episode])
             if result:
                 return True
             else:
@@ -24,9 +24,10 @@ class FormatChecker:
 
     def is_ordered_page_number(self, data):
         current_length = 0
-        total_length = len(data)
+        total_length = data['page_num']
+        image_urls = data['image_urls']
         start = None
-        for url in data:
+        for url in image_urls:
             result = self.img_checker.match(url)
             if result:
                 if start == None:
@@ -77,7 +78,6 @@ if __name__ == "__main__":
     #     "https://comicbus.live/online/a-9337.html?ch=312",
     #     "https://comicbus.live/online/a-9337.html?ch=31"
     # ]
-    print(episode_urls)
     if checker.is_episode_url(episode_urls):
         print("correct episode_url")
     else:
@@ -88,7 +88,8 @@ if __name__ == "__main__":
     out, err = p.communicate()
     img_urls = json.loads(out)
     ## static test data
-    # img_urls = [
+    # page_num = 6
+    # image_urls = [
     #     "https://img4.8comic.com/4/17838/0/001_S98.jpg",
     #     "https://img4.8comic.com/4/17838/0/002_bUU.jpg",
     #     "https://img4.8comic.com/4/17838/0/003_4vM.jpg",
@@ -97,7 +98,8 @@ if __name__ == "__main__":
     #     "https://img4.8comic.com/4/17838/0/006_Gh8.jpg"
     # ]
     ## wrong page number
-    # img_urls = [
+    # page_num = 6
+    # image_urls = [
     #     "https://img4.8comic.com/4/17838/0/001_S98.jpg",
     #     "https://img4.8comic.com/4/17838/0/002_bUU.jpg",
     #     "https://img4.8comic.com/4/17838/0/003_4vM.jpg",
