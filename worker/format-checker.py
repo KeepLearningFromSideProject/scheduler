@@ -54,6 +54,7 @@ if __name__ == "__main__":
     execute_command = ["../scripts/get_comic_home.py"]
     p = Popen(execute_command, stdout=PIPE, stderr=PIPE)
     out, err = p.communicate()
+    print(out)
     home_url = json.loads(out)
     ## static test data
     # home_urls = [
@@ -71,6 +72,7 @@ if __name__ == "__main__":
     execute_command = ["../scripts/get_episode_urls.py"]
     p = Popen(execute_command, stdout=PIPE, stderr=PIPE)
     out, err = p.communicate()
+    print(out)
     episode_urls = json.loads(out)
     ## static test data
     # episode_urls = [
@@ -86,6 +88,7 @@ if __name__ == "__main__":
     execute_command = ["../scripts/get_images.py"]
     p = Popen(execute_command, stdout=PIPE, stderr=PIPE)
     out, err = p.communicate()
+    print(out)
     img_urls = json.loads(out)
     ## static test data
     # page_num = 6
