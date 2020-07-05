@@ -10,4 +10,4 @@ RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
 RUN apt-get install -y nodejs vim
 WORKDIR /root/
 COPY --from=0 /root/scheduler /root/
-CMD ["./run.py"]
+CMD ["./run.sh"]
