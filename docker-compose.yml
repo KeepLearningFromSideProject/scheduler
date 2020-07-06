@@ -1,9 +1,10 @@
 version: '3'
 services:
     ezworker:
-        image: ezworker
+        image: ezworker:latest
+        container_name: ezworker-instance
         build:
             context: .
             dockerfile: ./Dockerfile
         ports:
-            - "5000:5000"
+            - 5000:5000
