@@ -102,7 +102,7 @@ def main(comic_name):
     result = {}
     for ep_name in episode_urls:
         page_num = getImageInfo(episode_urls[ep_name])[1]
-        print("Downloading [" + comic_name + ":" + ep_name + "-" + str(page_num) + " pages]:")
+        #print("Downloading [" + comic_name + ":" + ep_name + "-" + str(page_num) + " pages]:")
 
         result[ep_name] = getPictureUrls(
                 episode_urls[ep_name], page_num)
@@ -111,7 +111,7 @@ def main(comic_name):
     return result
 
 if __name__== '__main__':
-    comic_name = sys.argv[1]
+    comic_name = "失色世界"
 
     results = main(comic_name)
 

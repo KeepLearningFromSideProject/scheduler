@@ -8,3 +8,13 @@ services:
             dockerfile: ./Dockerfile
         ports:
             - 5000:5000
+    ezworker-debug:
+        image: ezworker-debug:latest
+        container_name: ezworker-instance-debug
+        volumes:
+            - ./:/root
+        build:
+            context: .
+            dockerfile: ./Dockerfile.debug
+        ports:
+            - 5000:5000

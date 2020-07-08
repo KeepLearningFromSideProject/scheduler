@@ -6,15 +6,16 @@ import requests
 import time
 import json
 import sys
+from urllib.parse import quote_plus, unquote_plus
 
 app = Flask(__name__)
 
 @app.route("/execute")
 def execute():
     code = request.args.get('code')
-    args = request.args.get('args')
+    code = quote_plus(code)
 
-    execute_command = ["python3", "../worker/ezworker.py", code, args]
+    execute_command = ["python3", "../worker/ezworker.py", code]
     p = Popen(execute_command, stdout=PIPE, stderr=PIPE)
 
     # wait for the process to terminate

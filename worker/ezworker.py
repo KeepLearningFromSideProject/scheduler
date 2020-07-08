@@ -1,25 +1,20 @@
 #!/usr/local/env python3
 import sys
 from subprocess import Popen, PIPE
+from urllib.parse import quote_plus, unquote_plus
 
-def translator(code, args):
-    pass
-
-def solver(code, args):
-    execute_command = ["python3", "-c", code, args]
+def solver(code):
+    execute_command = ["python3", "-c", code]
     p = Popen(execute_command, stdout=PIPE, stderr=PIPE)
 
     # wait for the process to terminate
     # or use p.wait() to wait
     out, err = p.communicate()
-    print(out)
+    print(out.decode("utf-8"), end='')
 
 def main():
-    code = sys.argv[1]
-    args = sys.argv[2]
-
-    translator(code, args)
-    solver(code, args)
+    code = unquote_plus(sys.argv[1])
+    solver(code)
 
 if __name__ == "__main__":
     main()

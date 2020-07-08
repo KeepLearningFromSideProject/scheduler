@@ -7,7 +7,6 @@
 </head>
 <body>
 	<textarea id="code" cols="30" rows="10"></textarea>
-	<input type="text" id="search">
 	<button id="submit">submit</button>
 	<script>
 		function fixedEncodeURIComponent(str) {
@@ -24,13 +23,11 @@
 			// * encodeURIComponent() will not encode: ~!*()'
 			var code = document.getElementById('code').value;
 			code = fixedEncodeURIComponent(code);
-			var args = document.getElementById('search').value;
-			args = fixedEncodeURIComponent(args);
 
 			var request = new XMLHttpRequest();
-			request.open('GET', `/execute?code=${code}&args=${args}`, true);
+			request.open('GET', `/execute?code=${code}`, true);
 			request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-			
+
 			request.onload = function() {
 				if (this.status >= 200 && this.status < 400) {
 					// Success!
