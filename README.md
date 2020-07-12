@@ -16,7 +16,7 @@
 	* exception handler
 
 * Architecture
-![](https://imgur.com/LeHpf1n)
+![image of architecture](https://imgur.com/LeHpf1n.png)
 
 ## Ongoing
 
