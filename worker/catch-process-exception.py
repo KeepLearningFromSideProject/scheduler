@@ -2,8 +2,6 @@
 import sys
 from subprocess import Popen, PIPE, check_output
 
-def translator(code, args):
-    pass
 
 # How to catch exception output from Python subprocess.check_output()?
 # https://stackoverflow.com/a/61676517

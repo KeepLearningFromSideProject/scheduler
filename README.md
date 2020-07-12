@@ -15,12 +15,17 @@
 		check the scipt output in [scripts](https://github.com/KeepLearningFromSideProject/SimpleComicCrawler/tree/crawl_engine/scripts)
 	* exception handler
 
+* Architecture
+![](https://imgur.com/LeHpf1n)
+
 ## Ongoing
 
 * determine what the exception is & what the error code is
 * use [inspect](https://docs.python.org/3/library/inspect.html) to record the process information
+* use official k8s python library to manage worker[kubernetes-client/python](https://github.com/kubernetes-client/python)
+* implement worker daemon
 
 ## API
 
-* http://localhost/execute?code=SOURCE_CODE&args=SEARCH_STR
+* http://localhost/execute?code=SOURCE_CODE
 
