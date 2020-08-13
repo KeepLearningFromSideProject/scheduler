@@ -25,7 +25,19 @@
 * use official k8s python library to manage worker[kubernetes-client/python](https://github.com/kubernetes-client/python)
 * implement worker daemon
 
-## API
+## Usage
+
+
+### Lanuch
+Execute the following command, and then it would launch a production and debug http server, whose port are 5000 and 5001 respectively.
+```
+docker-compose up
+```
+
+
+### API
+Note that code must be encoded with `urllib.parse.quote_plus`, and our testsuite is part of another project, if you don't want implement testsuite by yourself, just try ([SimpleComicCrawler](https://github.com/KeepLearningFromSideProject/SimpleComicCrawler))
 
 * http://localhost/execute?code=SOURCE_CODE
+
 

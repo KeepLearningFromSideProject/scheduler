@@ -17,4 +17,4 @@ services:
             context: .
             dockerfile: ./Dockerfile.debug
         ports:
-            - 5000:5000
+            - 5001:5000

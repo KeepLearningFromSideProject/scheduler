@@ -13,7 +13,7 @@ app = Flask(__name__)
 @app.route("/execute")
 def execute():
     code = request.args.get('code')
-    code = quote_plus(code)
+#    code = quote_plus(code)
 
     execute_command = ["python3", "../worker/ezworker.py", code]
     p = Popen(execute_command, stdout=PIPE, stderr=PIPE)
