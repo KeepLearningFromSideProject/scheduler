@@ -1,22 +1,26 @@
 # scheduler
 ## Architecture
-![image of architecture](https://imgur.com/LeHpf1n.png)
+![image of architecture](https://i.imgur.com/59QhEtD.png)
 
-### Manager Daemon
-The most important part is "manager daemon". It contains policy (Evaluator), automatic deploy (k8s controller) and task controller.
+### HTTP Daemon
+Recieve all request
 
-* Evaluator: evaluate a task and determine which worker is the executor
-* K8S controller: dynamically manage worker node
-* Task Controller
-* * Send task information to workers.
-* * Time each task. If the task executes too long, send cancel command to workers.
-* * If the task fails, forward the information to "retry queue".
+### States Controller Daemon
+* Socket Server:
+* Socket Client:
+* k8s script: dynamically manage worker node
+* Send task information to workers.
+* Time each task. If the task executes too long, send cancel command to workers. If the task fails, forward the information to "retry queue".
 
 ### Worker Daemon
-* keep alive
+* Socket Server: It's used to monitor task status
 * execute task (allow be interrupted)
 
 ### Others
+* Task Class
+  * Evaluator: evaluate a task and determine which worker is the executor
+  * Generate Task ID
+  * Choose Task
 
 * Task Types
 	* pending
