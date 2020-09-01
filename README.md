@@ -2,13 +2,13 @@
 ## Architecture
 ![image of architecture](https://i.imgur.com/59QhEtD.png)
 
-* Why not use http in all scenraio?
+* Why not use http in all scenraio?  
   I'm not sure it is possible or not and I have never seen people monitor http directly!? In general, we monitor socket with epoll.
-* Why not use K8S official library directly?
+* Why not use K8S official library directly?  
   Our scenraio is very simple, so spending time on learning a novel library is not very helpful.
 
 ### HTTP Daemon
-Recieve all request
+Recieve all request and forward to States Controller Daemon.
 
 ### States Controller Daemon
 * Socket Client
@@ -18,8 +18,12 @@ Recieve all request
 * Time each task. If the task executes too long, send cancel command to workers. If the task fails, forward the information to "retry queue".
 
 ### Worker Daemon
+Each worker is responsible for one type task, because it's the K8S' philosphy. When a pod is broken, just delete it. When the service is overloading, create more and more pods. That's "scale up". We don't pay attention on solving the proble with a very correct answer at the moment.
+
 * Socket Server
 * Execute task
+  * Launch as a process
+  * Execute in a sandbox!?
 
 ### Others
 * Task Class
@@ -43,13 +47,12 @@ Recieve all request
 	* exception handler
 
 ### Ongoing
-* determine what the exception is & what the error code is
-* use [inspect](https://docs.python.org/3/library/inspect.html) to record the process information
-* use epoll & socket to build the communication between status controller daemon & worker daemon
+* Determine what the exception is & what the error code is
+* Use [inspect](https://docs.python.org/3/library/inspect.html) to record the process information
+* Use epoll & socket to build the communication between status controller daemon & worker daemon
 
 ### Maybe???
-* use official k8s python library to manage worker[kubernetes-client/python](https://github.com/kubernetes-client/python)
-* 
+* Use official k8s python library to manage worker[kubernetes-client/python](https://github.com/kubernetes-client/python)
 
 ## Usage
 ### Lanuch
