@@ -7,27 +7,32 @@ import time
 import json
 import sys
 from urllib.parse import quote_plus, unquote_plus
+import socket
+import os
 
 app = Flask(__name__)
+tmp_files = glob.glob('/tmp/*unixsocket')
+if len(tmp_files) == 0:
+    sys.exit(1)
+UNIX_SOCKET_ADDRESS = '{}/socket9527'.format(tmp_files[0])
 
 @app.route("/execute")
 def execute():
     code = request.args.get('code')
-#    code = quote_plus(code)
 
-    execute_command = ["python3", "../worker/ezworker.py", code]
-    p = Popen(execute_command, stdout=PIPE, stderr=PIPE)
+    sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    try:
+        sock.connect(UNIX_SOCKET_ADDRESS)
+    except socket.error as error:
+        sys.exit(1)
 
-    # wait for the process to terminate
-    # or use p.wait() to wait
-    out, err = p.communicate()
-    print(out)
-
+    #execute_command = ["python3", "../worker/ezworker.py", code]
+    out ='hello'
     return out
 
 @app.route("/")
 def index():
-    return render_template("index.html")    
+    return render_template("index.html")
 
 def main():
     global app
