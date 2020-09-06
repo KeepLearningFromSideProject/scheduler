@@ -28,7 +28,7 @@ jobs:
       uses: actions/setup-node@v2.1.0
     - name: run test
       run: |
-        cd worker
+        cd src/worker
         if [[ $(python3 ./format-checker.py | grep "correct" | wc -l) -ne 3 ]]; then
           exit 1
         fi

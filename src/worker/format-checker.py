@@ -51,7 +51,7 @@ if __name__ == "__main__":
     import json
     from subprocess import Popen, PIPE
 
-    execute_command = ["../scripts/get_comic_home.py"]
+    execute_command = ["../../scripts/get_comic_home.py"]
     p = Popen(execute_command, stdout=PIPE, stderr=PIPE)
     out, err = p.communicate()
     home_url = json.loads(out)
@@ -68,7 +68,7 @@ if __name__ == "__main__":
         print("incorrect home_url")
 
     
-    execute_command = ["../scripts/get_episode_urls.py"]
+    execute_command = ["../../scripts/get_episode_urls.py"]
     p = Popen(execute_command, stdout=PIPE, stderr=PIPE)
     out, err = p.communicate()
     episode_urls = json.loads(out)
@@ -83,7 +83,7 @@ if __name__ == "__main__":
     else:
         print("incorrect episode_url")
 
-    execute_command = ["../scripts/get_images.py"]
+    execute_command = ["../../scripts/get_images.py"]
     p = Popen(execute_command, stdout=PIPE, stderr=PIPE)
     out, err = p.communicate()
     img_urls = json.loads(out)
