@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cd http && ./server.py
+cd src/server && ./server.py

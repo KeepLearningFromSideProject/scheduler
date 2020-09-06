@@ -1,7 +1,7 @@
 FROM ubuntu
 RUN apt-get update && apt-get install -y git
 WORKDIR /root/
-RUN git clone https://github.com/KeepLearningFromSideProject/scheduler.git
+RUN git clone -b easy.worker https://github.com/KeepLearningFromSideProject/scheduler.git
 
 # first stage to install all package
 FROM python:3.6.11
