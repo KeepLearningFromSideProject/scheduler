@@ -1,7 +1,15 @@
 # scheduler
 ## Architecture
-![image of architecture](https://i.imgur.com/59QhEtD.png)
+![image of architecture](https://i.imgur.com/MS2lABW.png)
 
+* (a): Flask API is a simple http API. It would build a socket connection with Status Controller after each valid request.
+* (b): A socket connection, which is monitored by epoll.
+* (c): When receive a new request from HTTP Daemon, call Task Emulator to score every task, and generate a Task ID. Then, store task into the message queue.
+* (d): Subscribe the message queue.
+* (e): A static connection. It could be an unix domain socket, a http socket or any kind of IPC. If worker daemon is running on an independent host, it must be a http socket.
+* (f): Subscribe the message queue.
+
+### Philosophy
 * Why not use http in all scenraio?  
   I'm not sure it is possible or not and I have never seen people monitor http directly!? In general, we monitor socket with epoll.
 * Why not use K8S official library directly?  
