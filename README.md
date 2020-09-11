@@ -1,12 +1,15 @@
 # scheduler
 ## Architecture
-![image of architecture](https://i.imgur.com/MS2lABW.png)
+![image of architecture](https://i.imgur.com/pUODjZL.png)
 
 * (a): Flask API is a simple http API. It would build a socket connection with Status Controller after each valid request.
 * (b): A socket connection, which is monitored by epoll.
 * (c): When receive a new request from HTTP Daemon, call Task Emulator to score every task, and generate a Task ID. Then, store task into the message queue.
-* (d): Subscribe the message queue.
-* (e): A static connection. It could be an unix domain socket, a http socket or any kind of IPC. If worker daemon is running on an independent host, it must be a http socket.
+* (d): Restart worker or 
+* (e): Two static connections.
+  * First one is used to keep alive and return the Worker's status to Task Controller.
+  * Second one is used to transmit/emit task information. If necessnary, we would use queue as communication method between threads.
+  * A connection could be an unix domain socket, a http socket or any kind of IPC. If worker daemon is running on an independent host, it must be a http socket.
 * (f): Subscribe the message queue.
 
 ### Philosophy
