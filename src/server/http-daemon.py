@@ -11,21 +11,19 @@ import socket
 import os
 
 app = Flask(__name__)
-tmp_files = glob.glob('/tmp/*unixsocket')
-if len(tmp_files) == 0:
-    sys.exit(1)
-UNIX_SOCKET_ADDRESS = '{}/socket9527'.format(tmp_files[0])
+server_address = ("127.0.0.1", 8888)
 
 @app.route("/execute")
 def execute():
     code = request.args.get('code')
 
-    sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
-        sock.connect(UNIX_SOCKET_ADDRESS)
+        sock.connect(server_address)
+        print("client connect successful")
     except socket.error as error:
         sys.exit(1)
-
+    
     #execute_command = ["python3", "../worker/ezworker.py", code]
     out ='hello'
     return out

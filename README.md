@@ -5,7 +5,7 @@
 * (a): Flask API is a simple http API. It would build a socket connection with Status Controller after each valid request.
 * (b): A socket connection, which is monitored by epoll.
 * (c): When receive a new request from HTTP Daemon, call Task Emulator to score every task, and generate a Task ID. Then, store task into the message queue.
-* (d): Restart worker or 
+* (d): Restart or launch workers 
 * (e): Two static connections.
   * First one is used to keep alive and return the Worker's status to Task Controller.
   * Second one is used to transmit/emit task information. If necessnary, we would use queue as communication method between threads.
