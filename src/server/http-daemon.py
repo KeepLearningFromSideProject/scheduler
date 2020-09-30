@@ -24,6 +24,21 @@ def execute():
     except socket.error as error:
         sys.exit(1)
     
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
+        sock.connect(server_address)
+    except socket.error as error:
+        #sys.exit(1)
+        pass
+    
+    task = {
+        "host": "http-daemon",
+        "type": "request",
+        "content": code
+    }
+    sock.send(str.encode(json.dumps(task)))
+    response = sock.recv(4096)
+    print(response)
     #execute_command = ["python3", "../worker/ezworker.py", code]
     out ='hello'
     return out
