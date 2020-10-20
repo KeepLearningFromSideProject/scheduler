@@ -7,8 +7,9 @@
 * (c): When receive a new request from HTTP Daemon, call Task Emulator to score every task, and generate a Task ID. Then, store task into the message queue.
 * (d): Restart or launch workers 
 * (e): Two static connections.
-  * First one is used to keep alive and return the Worker's status to Task Controller.
-  * Second one is used to transmit/emit task information. If necessnary, we would use queue as communication method between threads.
+  * The first one (task receiver) receives the tasks from the task controller.
+  * The second one (result emitter) sends the results to the task controller.
+  * We would use queue as communication method between threads, which are the task receiver, result emitter and executors.
   * A connection could be an unix domain socket, a http socket or any kind of IPC. If worker daemon is running on an independent host, it must be a http socket.
 * (f): Subscribe the message queue.
 
